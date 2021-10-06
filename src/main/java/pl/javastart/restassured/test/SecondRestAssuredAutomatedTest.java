@@ -11,8 +11,9 @@ public class SecondRestAssuredAutomatedTest {
         given()
             .log().method()
             .log().uri()
+            .pathParam("petId", 1)
         .when()
-            .get("https://swaggerpetstore.przyklady.javastart.pl/v2/pet/1")
+            .get("https://swaggerpetstore.przyklady.javastart.pl/v2/pet/{petId}")
         .then()
             .log().all()
             .statusCode(200);

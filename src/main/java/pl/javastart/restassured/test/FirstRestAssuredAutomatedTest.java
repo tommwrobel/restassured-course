@@ -9,7 +9,7 @@ public class FirstRestAssuredAutomatedTest {
     @Test
     public void givenNonExistingPetIdWhenGetPetThenPetNotFoundTest() {
         given().when()
-                .get("https://swaggerpetstore.przyklady.javastart.pl/v2/pet/0")
+                .get("https://swaggerpetstore.przyklady.javastart.pl/v2/pet/{petId}", 0)
                 .then()
                 .statusCode(404);
     }
