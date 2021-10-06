@@ -27,5 +27,14 @@ public class UserCreationTests {
             .post("https://swaggerpetstore.przyklady.javastart.pl/v2/user")
         .then()
             .statusCode(200);
+
+        given()
+            .contentType("application/json")
+            .pathParam("username", "firstuser")
+        .when()
+            .get("https://swaggerpetstore.przyklady.javastart.pl/v2/user/{username}")
+        .then()
+            .log().all()
+            .statusCode(200);
     }
 }
