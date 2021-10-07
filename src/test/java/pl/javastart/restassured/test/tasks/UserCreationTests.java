@@ -1,6 +1,7 @@
 package pl.javastart.restassured.test.tasks;
 
 import org.testng.annotations.Test;
+import pl.javastart.main.pojo.User;
 
 import static io.restassured.RestAssured.given;
 
@@ -8,18 +9,15 @@ public class UserCreationTests {
 
     @Test
     public void givenCorrectUserDataWhenCreateUserThenUserIsCreatedTest() {
-        String user = """
-                {
-                  "id": 445,
-                  "username": "firstuser",
-                  "firstName": "Krzysztof",
-                  "lastName": "Kowalski",
-                  "email": "krzysztof@test.com",
-                  "password": "password",
-                  "phone": "+123456789",
-                  "userStatus": 1
-                }
-                """;
+        User user = new User();
+        user.setId(445);
+        user.setUsername("testuser");
+        user.setFirstName("Krzysztof");
+        user.setLastName("Kowalski");
+        user.setEmail("krzysztof@test.com");
+        user.setPassword("password");
+        user.setPhone("+123456789");
+        user.setUserStatus(1);
 
         given()
             .body(user).contentType("application/json")
@@ -30,7 +28,7 @@ public class UserCreationTests {
 
         given()
             .contentType("application/json")
-            .pathParam("username", "firstuser")
+            .pathParam("username", "testuser")
         .when()
             .get("https://swaggerpetstore.przyklady.javastart.pl/v2/user/{username}")
         .then()
