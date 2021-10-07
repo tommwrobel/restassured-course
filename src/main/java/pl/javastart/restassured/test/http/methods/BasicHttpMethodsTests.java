@@ -51,4 +51,70 @@ public class BasicHttpMethodsTests {
             .log().all()
             .statusCode(200);
     }
+
+    @Test
+    public void givenExistingPetWhenUpdatePetNameThenPetIsChangedTest() {
+
+        String pet = """
+                {
+                  "id": 123,
+                  "category": { 
+                    "id": 1, 
+                    "name": "dogs" 
+                  }, 
+                  "name": "Burek", 
+                  "photoUrls": [ 
+                    "http://photos.com/dog1.jpg" 
+                  ], 
+                  "tags": [ 
+                    { 
+                      "id": 1, 
+                      "name": "dogs-category" 
+                    } 
+                  ], 
+                  "status": "available" 
+                }
+                """;
+
+        given()
+                .log().all()
+                .body(pet)
+                .contentType("application/json")
+        .when()
+                .post("https://swaggerpetstore.przyklady.javastart.pl/v2/pet")
+        .then()
+                .log().all()
+                .statusCode(200);
+
+        pet = """
+                {
+                  "id": 123,
+                  "category": { 
+                    "id": 1, 
+                    "name": "dogs" 
+                  }, 
+                  "name": "Reksio", 
+                  "photoUrls": [ 
+                    "http://photos.com/dog1.jpg" 
+                  ], 
+                  "tags": [ 
+                    { 
+                      "id": 1, 
+                      "name": "dogs-category" 
+                    } 
+                  ], 
+                  "status": "available" 
+                }
+                """;
+
+        given()
+                .log().all()
+                .body(pet)
+                .contentType("application/json")
+        .when()
+                .put("https://swaggerpetstore.przyklady.javastart.pl/v2/pet")
+        .then()
+                .log().all()
+                .statusCode(200);
+    }
 }
